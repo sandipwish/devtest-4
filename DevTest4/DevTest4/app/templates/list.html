@@ -9,8 +9,14 @@
         </label>
     </li>
 </ul>
-<form ng-submit="todoList.addTodo()">
-    <input id="todoText" type="text" ng-model="todoList.todoText" size="30"
-           placeholder="add new todo here">
-    <input class="btn-primary" type="submit" value="add">
+<form name="myForm" novalidate accessible-form ng-submit="todoList.addTodo(myForm)">
+    <div>
+        <input id="todoText" type="text" name="todoText" ng-model="todoList.todoText" size="30" required
+               placeholder="add new todo here" focus="true">
+        <span style="color:red" ng-show="myForm.todoText.$error.required && !myForm.todoText.$pristine">
+            * Todo task is required.
+        </span>
+    </div>
+    <br />
+    <input class="btn btn-primary" type="submit" value="add" ng-disabled="myForm.$invalid">
 </form>
